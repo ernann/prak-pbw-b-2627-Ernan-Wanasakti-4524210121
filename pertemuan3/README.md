@@ -10,45 +10,35 @@
 
 ## 1. Tujuan
 
-Pada Tugas 3 ini dilakukan praktik pembuatan database dan tabel menggunakan PHP dan MySQL. Program dijalankan melalui Terminal VS Code dan hasil database diperiksa melalui phpMyAdmin.
-
-Program juga dimodifikasi dengan menambahkan beberapa perubahan pada struktur database.
+Tugas 3 dilakukan untuk menjalankan contoh program Pertemuan 3 menggunakan PHP dan MySQL hingga menghasilkan output tanpa error kritis. Selain menjalankan program, dilakukan modifikasi pada program dan database serta dilakukan pengamatan terhadap hasilnya melalui Terminal VS Code dan phpMyAdmin.
 
 ---
 
-## 2. Database yang Digunakan
+## 2. Hasil Pelaksanaan
 
-Database yang digunakan pada hasil modifikasi adalah:
+Program berhasil dijalankan menggunakan PHP dan MySQL. Database yang digunakan pada hasil modifikasi adalah **akademik2**.
 
-```text
-akademik2
-```
+Database tersebut memiliki lima tabel, yaitu:
 
-Database dibuat menggunakan PHP dengan perintah:
+- `mahasiswa`
+- `dosen`
+- `mata_kuliah`
+- `krs`
+- `mk_krs`
 
-```php
-CREATE DATABASE IF NOT EXISTS akademik2
-```
+Hasil running menunjukkan bahwa database dan seluruh tabel berhasil dibuat atau sudah tersedia.
 
----
+### Dokumentasi Hasil Running
 
-## 3. Tabel yang Dibuat
-
-Program membuat 5 tabel, yaitu:
-
-1. `mahasiswa`
-2. `dosen`
-3. `mata_kuliah`
-4. `krs`
-5. `mk_krs`
-
-Tabel-tabel tersebut menggunakan database `akademik2` dan beberapa tabel memiliki hubungan menggunakan foreign key.
+![Hasil Running Terminal](run_tugas3.png)
 
 ---
 
-## 4. Modifikasi Program
+## 3. Modifikasi Program
 
-### Modifikasi 1 - Menambahkan Nomor HP
+Modifikasi yang dilakukan pada program meliputi:
+
+### 3.1 Penambahan Field Nomor HP
 
 Pada tabel `mahasiswa` ditambahkan field:
 
@@ -56,9 +46,9 @@ Pada tabel `mahasiswa` ditambahkan field:
 no_hp VARCHAR(15) NOT NULL
 ```
 
-Field ini digunakan untuk menyimpan nomor HP mahasiswa.
+Penambahan ini bertujuan agar data mahasiswa memiliki informasi nomor HP.
 
-### Modifikasi 2 - Menambahkan Validasi IPK
+### 3.2 Penambahan Validasi IPK
 
 Pada tabel `mahasiswa` ditambahkan validasi:
 
@@ -66,21 +56,35 @@ Pada tabel `mahasiswa` ditambahkan validasi:
 CHECK (ipk >= 0.00 AND ipk <= 4.00)
 ```
 
-Validasi ini digunakan agar nilai IPK hanya berada pada rentang 0.00 sampai 4.00.
+Validasi tersebut digunakan untuk memastikan nilai IPK berada pada rentang 0.00 sampai 4.00.
 
-### Modifikasi 3 - Menggunakan Database `akademik2`
+### 3.3 Perubahan Nama Database
 
-Database dari program awal yang menggunakan `akademik` diubah menjadi:
-
-```text
-akademik2
-```
-
-Perubahan ini dilakukan agar hasil modifikasi tidak bercampur dengan database sebelumnya.
+Database pada program awal yang menggunakan `akademik` diubah menjadi `akademik2`. Perubahan ini dilakukan agar hasil modifikasi memiliki database tersendiri dan tidak bercampur dengan database sebelumnya.
 
 ---
 
-## 5. Lima Bagian Kode yang Penting
+## 4. Perbandingan Sebelum dan Sesudah Modifikasi
+
+Sebelum dilakukan modifikasi, tabel `mahasiswa` belum memiliki field `no_hp` dan belum memiliki validasi rentang nilai IPK.
+
+![Sebelum Modifikasi](sebelum.png)
+
+Setelah dilakukan modifikasi, tabel `mahasiswa` memiliki tambahan field `no_hp` serta validasi nilai IPK 0.00 sampai 4.00.
+
+![Sesudah Modifikasi](sesudah.png)
+
+---
+
+## 5. Hasil Database
+
+Setelah program berhasil dijalankan, database `akademik2` diperiksa melalui phpMyAdmin. Hasil pemeriksaan menunjukkan bahwa database berhasil dibuat dan memiliki lima tabel yang sesuai dengan program.
+
+![Database akademik2](db_akademik2.png)
+
+---
+
+## 6. Lima Bagian Kode yang Penting
 
 ### 1. Koneksi Database
 
@@ -88,23 +92,23 @@ Perubahan ini dilakukan agar hasil modifikasi tidak bercampur dengan database se
 require_once 'koneksi.php';
 ```
 
-Digunakan untuk memanggil file koneksi agar program dapat terhubung dengan MySQL.
+Bagian ini digunakan untuk menghubungkan program dengan konfigurasi koneksi MySQL.
 
-### 2. Membuat Database
+### 2. Pembuatan Database
 
 ```php
 $sqlCreateDB = "CREATE DATABASE IF NOT EXISTS akademik2";
 ```
 
-Digunakan untuk membuat database `akademik2` jika database tersebut belum tersedia.
+Perintah tersebut digunakan untuk membuat database `akademik2` apabila database belum tersedia.
 
-### 3. Memilih Database
+### 3. Pemilihan Database
 
 ```php
 mysqli_select_db($koneksi, 'akademik2');
 ```
 
-Digunakan untuk memilih database yang akan digunakan oleh program.
+Perintah ini digunakan untuk memilih database `akademik2` sebagai database yang digunakan dalam proses pembuatan tabel.
 
 ### 4. Field Nomor HP
 
@@ -112,7 +116,7 @@ Digunakan untuk memilih database yang akan digunakan oleh program.
 no_hp VARCHAR(15) NOT NULL
 ```
 
-Digunakan untuk menyimpan nomor HP mahasiswa dan merupakan salah satu hasil modifikasi.
+Field ini merupakan salah satu modifikasi yang ditambahkan pada tabel `mahasiswa` untuk menyimpan nomor HP.
 
 ### 5. Validasi IPK
 
@@ -120,200 +124,20 @@ Digunakan untuk menyimpan nomor HP mahasiswa dan merupakan salah satu hasil modi
 CHECK (ipk >= 0.00 AND ipk <= 4.00)
 ```
 
-Digunakan untuk membatasi nilai IPK agar berada pada rentang 0.00 sampai 4.00.
+Validasi ini digunakan untuk membatasi nilai IPK agar hanya berada pada rentang 0.00 sampai 4.00.
 
 ---
 
-## 6. Cara Menjalankan Program
+## 7. Error yang Pernah Muncul
 
-Program dijalankan melalui Terminal VS Code.
+Error yang ditemukan berkaitan dengan koneksi MySQL ketika MySQL pada XAMPP belum aktif. Kondisi tersebut menyebabkan program PHP tidak dapat terhubung dengan database.
 
-Pastikan MySQL pada XAMPP sudah dalam keadaan **Running**.
-
-Masuk ke folder:
-
-```text
-C:\xampp\htdocs\pertemuan3
-```
-
-Kemudian jalankan:
-
-```powershell
-C:\xampp\php\php.exe tugas3.php
-```
-
-Jika berhasil, akan muncul hasil bahwa database dan tabel berhasil dibuat atau sudah tersedia.
+Perbaikan dilakukan dengan mengaktifkan MySQL melalui XAMPP, kemudian menjalankan kembali program. Setelah MySQL aktif, program dapat dijalankan dengan baik dan database beserta tabel berhasil dibuat.
 
 ---
 
-## 7. Screenshot Hasil Running di Terminal VS Code
+## 8. Kesimpulan
 
-Hasil running program dapat dilihat melalui Terminal VS Code.
+Berdasarkan hasil pelaksanaan, program Pertemuan 3 berhasil dijalankan menggunakan PHP dan MySQL tanpa error kritis. Database `akademik2` berhasil dibuat beserta lima tabel yang diperlukan.
 
-Contoh hasil:
-
-```text
-Database berhasil dibuat atau sudah ada.
-Tabel berhasil dibuat atau sudah ada.
-Tabel berhasil dibuat atau sudah ada.
-Tabel berhasil dibuat atau sudah ada.
-Tabel berhasil dibuat atau sudah ada.
-Tabel berhasil dibuat atau sudah ada.
-```
-
-**Screenshot hasil running:**
-
-> **[MASUKKAN SCREENSHOT HASIL RUNNING DI TERMINAL VS CODE DI SINI]**
-
-Screenshot ini digunakan sebagai bukti bahwa program berhasil dijalankan tanpa error kritis.
-
----
-
-## 8. Screenshot Database di phpMyAdmin
-
-Setelah program berhasil dijalankan, database diperiksa melalui phpMyAdmin.
-
-Buka:
-
-```text
-http://localhost/phpmyadmin
-```
-
-Kemudian pilih database:
-
-```text
-akademik2
-```
-
-Di dalam database tersebut terdapat 5 tabel:
-
-```text
-mahasiswa
-dosen
-mata_kuliah
-krs
-mk_krs
-```
-
-**Screenshot database `akademik2`:**
-
-> **[MASUKKAN SCREENSHOT DATABASE akademik2 DI PHPMYADMIN DI SINI]**
-
-Screenshot ini menunjukkan bahwa database berhasil dibuat.
-
----
-
-## 9. Screenshot Struktur Tabel Mahasiswa
-
-Struktur tabel `mahasiswa` diperiksa melalui menu **Structure** pada phpMyAdmin.
-
-Field yang terdapat pada tabel antara lain:
-
-```text
-id
-nim
-nama
-email
-no_hp
-prodi
-angkatan
-ipk
-```
-
-Field `no_hp` merupakan tambahan dari hasil modifikasi.
-
-**Screenshot Structure tabel mahasiswa:**
-
-> **[MASUKKAN SCREENSHOT STRUCTURE MAHASISWA DI PHPMYADMIN DI SINI]**
-
----
-
-## 10. Screenshot Isi/Database di phpMyAdmin
-
-Selain melihat struktur tabel, hasil database juga dapat diperiksa melalui menu **Browse** atau tampilan tabel pada phpMyAdmin.
-
-**Screenshot hasil pemeriksaan:**
-
-> **[MASUKKAN SCREENSHOT BROWSE / HASIL TABEL DI PHPMYADMIN DI SINI]**
-
-Screenshot ini digunakan sebagai bukti tambahan bahwa database dan tabel dapat diakses melalui phpMyAdmin.
-
----
-
-## 11. Screenshot Sebelum Modifikasi
-
-Sebelum dilakukan modifikasi, program menggunakan database:
-
-```text
-akademik
-```
-
-Tabel `mahasiswa` belum memiliki field:
-
-```text
-no_hp
-```
-
-**Screenshot sebelum modifikasi:**
-
-> **[MASUKKAN SCREENSHOT SEBELUM MODIFIKASI DI SINI]**
-
----
-
-## 12. Screenshot Sesudah Modifikasi
-
-Setelah dilakukan modifikasi, program menggunakan:
-
-```text
-akademik2
-```
-
-Tabel `mahasiswa` memiliki tambahan:
-
-```sql
-no_hp VARCHAR(15) NOT NULL
-```
-
-dan validasi:
-
-```sql
-CHECK (ipk >= 0.00 AND ipk <= 4.00)
-```
-
-**Screenshot sesudah modifikasi:**
-
-> **[MASUKKAN SCREENSHOT SESUDAH MODIFIKASI DI SINI]**
-
----
-
-## 13. Error yang Pernah Muncul
-
-Salah satu error yang dapat terjadi adalah program tidak dapat terhubung dengan MySQL.
-
-### Penyebab
-
-MySQL pada XAMPP belum dijalankan sehingga PHP tidak dapat melakukan koneksi ke database.
-
-### Perbaikan
-
-1. Membuka XAMPP.
-2. Menjalankan MySQL dengan menekan tombol **Start**.
-3. Membuka kembali Terminal VS Code.
-4. Masuk ke folder `pertemuan3`.
-5. Menjalankan kembali program:
-
-```powershell
-C:\xampp\php\php.exe tugas3.php
-```
-
-Setelah MySQL berjalan, program dapat dijalankan kembali.
-
----
-
-## 14. Kesimpulan
-
-Tugas 3 berhasil dilakukan dengan membuat database dan tabel menggunakan PHP dan MySQL. Database yang digunakan pada hasil modifikasi adalah `akademik2`.
-
-Modifikasi yang dilakukan yaitu menambahkan field `no_hp` pada tabel `mahasiswa` dan menambahkan validasi nilai IPK dari 0.00 sampai 4.00.
-
-Hasil program dapat diperiksa melalui Terminal VS Code dan phpMyAdmin. Database `akademik2` beserta lima tabel berhasil dibuat dan dapat diakses dengan baik.
+Modifikasi yang dilakukan berupa penambahan field `no_hp`, validasi nilai IPK, dan perubahan nama database menjadi `akademik2`. Hasil modifikasi juga dapat diperiksa melalui phpMyAdmin dan menunjukkan bahwa struktur database telah sesuai dengan perubahan yang dilakukan.
