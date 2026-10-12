@@ -10,12 +10,12 @@ $ipk = $_POST['ipk'];
 
 $query = mysqli_query(
     $koneksi,
-    "UPDATE mahasiswa
-    SET nama='$nama',
-        email='$email',
-        prodi='$prodi',
-        angkatan='$angkatan',
-        ipk='$ipk'
+    "UPDATE mahasiswa 
+    SET nama='$nama', 
+        email='$email', 
+        prodi='$prodi', 
+        angkatan='$angkatan', 
+        ipk='$ipk' 
     WHERE nim='$nim'"
 );
 
@@ -23,11 +23,11 @@ if ($query) {
     echo "<script>
         alert('Data mahasiswa berhasil diubah');
         window.location.href = 'index.php';
-        </script>";
+    </script>";
 } else {
-echo "<script>
+    echo "<script>
         alert('Data gagal diubah');
         window.history.back();
-        </script>";
+    </script>";
 }
 ?>
